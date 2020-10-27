@@ -412,10 +412,6 @@ func (e *EndpointController) syncService(key string) error {
 			klog.V(5).Infof("Failed to find an IP for pod %s/%s", pod.Namespace, pod.Name)
 			continue
 		}
-		if !tolerateUnreadyEndpoints && pod.DeletionTimestamp != nil {
-			klog.V(5).Infof("Pod is being deleted %s/%s", pod.Namespace, pod.Name)
-			continue
-		}
 
 		ep, err := podToEndpointAddressForService(service, pod)
 		if err != nil {
